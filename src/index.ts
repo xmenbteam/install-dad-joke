@@ -4,8 +4,10 @@ import axios, { AxiosResponse } from "axios";
 
 export const thingToPrint = process.argv[2];
 
-const printThing = async (name: string) => {
-  console.log(`Hello ${name}! Fetching your dad joke... \n`);
+const printThing = async (name?: string) => {
+  console.log(
+    `Hello ${name ? name : "Stranger"}! Fetching your dad joke... \n`
+  );
   try {
     const response: AxiosResponse<any> = await axios.request({
       method: "GET",
@@ -15,7 +17,6 @@ const printThing = async (name: string) => {
         "X-RapidAPI-Host": "dad-jokes.p.rapidapi.com",
       },
     });
-    // const body = await response.json();
 
     console.log(response.data.body[0].setup, "\n");
     console.log(response.data.body[0].punchline, "\n");

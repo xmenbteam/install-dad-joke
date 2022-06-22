@@ -8,7 +8,7 @@ exports.thingToPrint = void 0;
 const axios_1 = __importDefault(require("axios"));
 exports.thingToPrint = process.argv[2];
 const printThing = async (name) => {
-    console.log(`Hello ${name}! Fetching your dad joke... \n`);
+    console.log(`Hello ${name ? name : "Stranger"}! Fetching your dad joke... \n`);
     try {
         const response = await axios_1.default.request({
             method: "GET",
@@ -18,7 +18,6 @@ const printThing = async (name) => {
                 "X-RapidAPI-Host": "dad-jokes.p.rapidapi.com",
             },
         });
-        // const body = await response.json();
         console.log(response.data.body[0].setup, "\n");
         console.log(response.data.body[0].punchline, "\n");
     }
